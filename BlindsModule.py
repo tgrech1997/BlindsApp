@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import RPi.GPIO as GPIO
-import picamera
+#import picamera ##Camera now remove
 import time
 from datetime import datetime
 from multiprocessing import Process
@@ -10,7 +10,7 @@ from multiprocessing import Process
 ms1Pin = 1  #MS1        #DEBUG#
 enaPin = 7 #ENABLE
 resPin = 12 #RESET      #DEBUG#
-mirPin = 14 #MIR
+#mirPin = 14 #MIR
 ldrPin = 15 # LDR
 slePin = 16 #SLEEP  
 stePin = 20 #STEP
@@ -242,21 +242,21 @@ def stepSize1(): #Toggle full-step/half-step
 		ms1Tgl = 0
 		return "Full-step"
 
-def capture_image(imagefile):
-	with picamera.PiCamera() as camera:
-		camera.resolution = (1920,1080) #2592x1944
-		camera.start_preview()
-		time.sleep(1) #Camera warm-up time
-		#camera.vflip = true
-		#camera.hflip = true
-		camera.capture(imagefile)
+#def capture_image(imagefile):
+#	with picamera.PiCamera() as camera:
+#		camera.resolution = (1920,1080) #2592x1944
+#		camera.start_preview()
+#		time.sleep(1) #Camera warm-up time
+#		#camera.vflip = true
+#		#camera.hflip = true
+#		camera.capture(imagefile)
 
-def movement(): #Movement detected
-	Process(target=capture_image(imagefile)).start
+#def movement(): #Movement detected
+#	Process(target=capture_image(imagefile)).start
 		
 def setup_triggers():
 	GPIO.add_event_detect(ldrPin, GPIO.BOTH, callback=autoCheck)  
-	GPIO.add_event_detect(mirPin, GPIO.FALLING, callback=movement)
+#	GPIO.add_event_detect(mirPin, GPIO.FALLING, callback=movement)
 	return "Triggers set"
 
 def reset(): #Cycle RESET pin
