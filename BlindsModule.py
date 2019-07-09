@@ -5,11 +5,11 @@ import time
 from datetime import datetime
 from multiprocessing import Process
 
-
+GPIO.setmode(GPIO.BCM) #pin numbering scheme
 ##PIN MAP ##
 ms1Pin = 24  #MS1        #DEBUG#
 resPin = 12 #RESET      #DEBUG#
-ldrPin = 16 # LDR
+ldrPin = 2 # LDR
 slePin = 23 #SLEEP  
 stePin = 21 #STEP
 dirPin = 20 #DIR
@@ -49,10 +49,11 @@ LED4 = 0
 BlindSpeed = 1.0
 LEDspeed = 1.0
 
+
+
 ## FUNCTIONS ##
 def setup():
 	GPIO.cleanup() #Reset
-	GPIO.setmode(GPIO.BCM) #pin numbering scheme
 	## INPUTS ##
 	GPIO.setup(ldrPin, GPIO.IN) #Light sensor
 	GPIO.setup(stoPin, GPIO.IN) #Stop switch
@@ -66,6 +67,7 @@ def setup():
 	LED = GPIO.PWM(ledPin, LEDhz) #LED is PWM instance on pin 18(ch0) at 50Hz
 	LED.start(0) #Start PWM with 0% on
 	
+setup()
 
 def LEDfade(power, delay = LEDDelay/LEDspeed): #Power 0-100%, Delay of 0 sets instantly
 	global LEDpwr
